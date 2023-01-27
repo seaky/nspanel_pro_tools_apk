@@ -29,6 +29,7 @@ After gain ADB access custom applications can be installed onto this unit. See (
 https://itead.cc/product/sonoff-nspanel-pro-smart-home-control-panel/
 
 ## Manual for v1.0
+
 ## ADB Access
 https://blakadder.com/nspanel-pro-sideload/
 
@@ -43,6 +44,9 @@ Unable to install third-part applications without gain ADB access.
 
 ## Features
 ### wakeup
+This app will turn on the display.  
+In order to make it turn off when not in use, you may change the display sleep settings (`Settings -> Display -> Advanced -> Sleep`).
+
 Unfortunatelly this AOSP build does not support wakeup device which causes if official app is not running the device will go to deepsleep.
 Due to the lack of power button, just a hard reset (unplug) can wake up the device.
 
