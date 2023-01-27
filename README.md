@@ -37,10 +37,11 @@ https://blakadder.com/nspanel-pro-sideload/
 > Consequence of gaining ADB access the device won't get any official update and the device will be marked as rooted permanently.
  
 ## Install
-Unable to install third-part applications without gain ADB access.
+> **Note**
+> Unable to install third-part applications without gain ADB access.
 
 - Download apk
-- adb install <filename>.apk
+- adb install (filename).apk
 
 ## Features
 ### wakeup
@@ -60,10 +61,10 @@ Wake up on wave and touch feature are implemented in the app btw that was the or
 * activate toggle
   * activates a background service which runs even if tha app is killed
   * toggle state is presisted
-  * background service activates itself is the screen goes off
+  * background service activates itself if the screen goes off, if the screen is active the app does not monitor any sensor event
   * currently this option observes the proximity sensor gestures (current unable to disable it. see next version)
 * resume on boot
-  * activates the background service automatically without any user interaction
+  * activates the background service automatically after reboot without any user interaction
   * after reboot the app may not visible in app switcher
 * wake on touch
   * panel touch will also wakes up the device
