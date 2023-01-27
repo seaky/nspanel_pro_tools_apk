@@ -44,11 +44,17 @@ Unable to install third-part applications without gain ADB access.
 
 ## Features
 ### wakeup
-This app will turn on the display.  
-In order to make it turn off when not in use, you may change the display sleep settings (`Settings -> Display -> Advanced -> Sleep`).
-
+This app will turn on the display and prevent deepsleep.
 Unfortunatelly this AOSP build does not support wakeup device which causes if official app is not running the device will go to deepsleep.
 Due to the lack of power button, just a hard reset (unplug) can wake up the device.
+
+> **Note**
+> In order to make the display turn off when not in use, you may change the display sleep settings (`Settings -> Display -> Advanced -> Sleep`).
+
+ 
+> **Warning**
+> If the display sleep setting is set, an app which prevents the deepsleep must be running eg. this app, HA, Automagic etc.
+
 
 Wake up on wave and touch feature are implemented in the app btw that was the original purpose of the app.
 * activate toggle
