@@ -18,7 +18,7 @@
   - adjust brightness
 - optimized toggle operations  
   - preparation for future updates
-  - active switch fully turn off all features of the app including app launch
+  - main switch called "active" fully turn off all features of the app including app launch
   - all features can be set independently
 - note switch defaults are still off (will be changed in 1.2)
 - known bugs
