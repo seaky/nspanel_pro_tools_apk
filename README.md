@@ -24,6 +24,7 @@
 - known bugs
   - trigger label sometimes permanently visible solution: navigate between menus
   - auto adjust brightness level can be very low
+  - light menu icon is wrong
 > **Note**
 > Don't forget to activate main switch
 
