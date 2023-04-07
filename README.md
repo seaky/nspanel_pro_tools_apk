@@ -1,4 +1,8 @@
 # NSPanel Pro Tools Application
+
+<img src="assets/icon/v1.svg" alt="App Icon" width="64">
+<img src="assets/icon/v2.svg" alt="App Icon" width="64">
+
 ## Version history
 
 ### v1.x (planned features)
