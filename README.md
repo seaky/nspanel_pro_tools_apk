@@ -1,15 +1,24 @@
 # NSPanel Pro Tools Application
 ## Version history
 
-### v1.x (planned features)
-- HA integration
+### v2.x (2024-Q1)
+- HA/HASS integration
+- Gesture based HASS events
+- Gesture based wake-up
 
-### v1.2 (planned features)
-- fix known bugs
-- add setup display sleep setting from app
-- add reboot https://github.com/seaky/nspanel_pro_tools_apk/issues/6
-- add modify auto-adjust-brightness parameters
-- investigate feature request https://github.com/seaky/nspanel_pro_tools_apk/issues/5
+### v2.0 (2024-01-xx - under testing)
+#### new features
+- code has been fully redesigned (easier to add new capabilites)
+- new Preference based UI (easier to add new capabilites)
+- screen allways on/oof feature (https://github.com/seaky/nspanel_pro_tools_apk/issues/5, https://github.com/seaky/nspanel_pro_tools_apk/issues/14)
+- reboot device (https://github.com/seaky/nspanel_pro_tools_apk/issues/6)
+- change hostname (https://github.com/seaky/nspanel_pro_tools_apk/issues/8)
+- display sleep time setting
+- automatic brightness change based on lightsensor
+
+#### bugfixes
+- touch screen reader memoryleak fixed
+- request exclude app from battery optimization, helps to prevent app kill by system
 
 ### v1.1 (2023-02-02)
 - added light sensor feature
@@ -68,13 +77,102 @@ Unable to install third-part applications without gain ADB access.
 - Download apk
 - adb install -r <filename>.apk
 
-## Features
+## Manual 2.x version
+### main switch
+Main switch allows for the complete disabling of the application's functions. Controls the background activities. Purpose of being able to disable the whole app without uninstall.
+* active toggle
+  * activates a background service which runs even if the app is "killed" from app-switcher
+  * off state turns all app features off including launch app after reboot
+
+## display tab
+### wakeup category
+Category for all wake-up related functions.
+
+Unfortunatelly this [AOSP](https://source.android.com/) build does not support wakeup device which causes that if official app is not running the device will go to deepsleep.
+Due to the lack of power button, just a hard reset (unplug) can wake up the device.
+
+#### Wake-on-wave
+Wake up the device by hand wave. 
+> [!NOTE]
+> Before turning it on, set up the sensor parameters on the sensor tab.
+
+#### Wake on touch
+Wake up the device by screen touch.
+
+### brightness category
+Category for all brightness related functions.
+#### Brightness
+Set system level display brightness. On certain cases it is used to set if no light change event is triggered.
+#### Brightness on light-below switch
+Set brightness to the given value if light-below event is triggered. 
+> [!NOTE]
+> Before turning it on, set up the sensor parameters on the sensor tab.
+
+#### Brightness on light-below seekbar
+Set brightness to the prescribed value.
+
+#### Brightness on light-above switch
+Set brightness to the given value if light-above event is triggered. 
+> [!NOTE]
+> Before turning it on, set up the sensor parameters on the sensor tab.
+
+#### Brightness on light-above seekbar
+Set brightness to the prescribed value.
+
+### screen category
+Category for all screen related functions.
+#### Display sleep
+Set system level display sleep time. 
+#### Screen-on time swicth
+During a predefinied period it turns on the screen and it remains on untile the end of the interval.
+#### Screen-on begin
+The time when the screen-on begins. 
+> [!TIP]
+> If the Begin time 00:00 and End time is also 00:00 the feature is.
+
+
+#### Screen-on end
+The time when the screen-on ends.
+
+## sensor tab
+### sensor proximity
+Category for proximity sensor related functions.
+#### Proximity sensor
+Proximity sensor live value shows actual sensor value and shows the trigger when it is activated.
+#### Proximity sensor trigger threshold
+Above the value the trigger event will be create
+
+### sensor light
+Category for proximity sensor related functions.
+#### Light sensor
+Light sensor live value shows actual sensor value and shows the trigger when it is activated.
+#### Light sensor trigger below
+Below the value the trigger event will be created
+#### Light sensor trigger above
+Above the value the trigger event will be created
+
+## settings tab
+### Resume on boot
+Autostart NSPanelTools app after device restart
+#### Reboot device
+This option reboots the device
+#### Hostname
+Changes the device hostname
+#### Debug mode
+Changes log level to debug
+#### Verbos mode
+Changes log level to verbose
+
+
+## Manual 1.x version
+
 ### main switch
 Switch controls the background activities. Purpose of being able to disable the whole app without uninstall.
 * active toggle
   * activates a background service which runs even if the app is "killed" from app-switcher
   * off state turns all app features off including launch app after reboot
-### wakeup
+
+### wake up
 Unfortunatelly this AOSP build does not support wakeup device which causes if official app is not running the device will go to deepsleep.
 Due to the lack of power button, just a hard reset (unplug) can wake up the device.
 
