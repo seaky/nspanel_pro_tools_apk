@@ -7,10 +7,11 @@
 - Gesture based wake-up
 
 ### v2.0 (2024-01-xx - under testing)
-#### new features
+#### new features (see manual [Manual 2.x version](#manual-2x-version) )
+- 
 - code has been fully redesigned (easier to add new capabilites)
 - new Preference based UI (easier to add new capabilites)
-- screen allways on/oof feature (https://github.com/seaky/nspanel_pro_tools_apk/issues/5, https://github.com/seaky/nspanel_pro_tools_apk/issues/14)
+- screen allways on/off feature (https://github.com/seaky/nspanel_pro_tools_apk/issues/5, https://github.com/seaky/nspanel_pro_tools_apk/issues/14)
 - reboot device (https://github.com/seaky/nspanel_pro_tools_apk/issues/6)
 - change hostname (https://github.com/seaky/nspanel_pro_tools_apk/issues/8)
 - display sleep time setting
@@ -61,7 +62,7 @@ After gain ADB access custom applications can be installed onto this unit. See (
 
 https://itead.cc/product/sonoff-nspanel-pro-smart-home-control-panel/
 
-## Manual for v1.1
+## Manual
 ## ADB Access
 https://blakadder.com/nspanel-pro-sideload/
 
