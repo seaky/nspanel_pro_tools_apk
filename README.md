@@ -1,5 +1,18 @@
 # NSPanel Pro Tools Application
-## Version history
+
+## Table of contents
+
+- [Version history](#app-version-history)
+- [Device info](#sonoff-nspanel-pro)
+- [Device rooting and sideload](#device-rooting-and-sideload)
+- [Install custom launcher](#install-custom-launcher)
+- [Install custom webview](#install-custom-webview)
+- [Install app](#install-app)
+- [Manual for v2.x](#manual-2x-version)
+- [Manual for v1.x](#manual-1x-version)
+
+
+## App Version history
 
 ### v2.x (2024-Q1)
 - HA/HASS integration
@@ -56,27 +69,105 @@
 
 Sonoff NSPanel Pro is a smart home control panel which based on Android 8.1 Oreo (AOSP) system.
 
-After gain ADB access custom applications can be installed onto this unit. See (https://blakadder.com/nspanel-pro-sideload/)
+![NSPanel Pro](doc/assets/nspanel-pro-small.png)
 
-![Drag Racing](doc/assets/nspanel-pro.png)
-
+Device info:
 https://itead.cc/product/sonoff-nspanel-pro-smart-home-control-panel/
 
-## Manual
-## ADB Access
-https://blakadder.com/nspanel-pro-sideload/
+## Device rooting and sideload
 
-> **Note**
-> In order to make the display turn off when not in use, you may change the display sleep settings (`Settings -> Display -> Advanced -> Sleep`).
+### Gaining ADB access
 
+- Download [ADB drivers](https://developer.android.com/studio/run/win-usb) and install.
+- Download [Android platform-tools](https://dl.google.com/android/repository/platform-tools-latest-windows.zip) unzip it to a folder.
+- Get device ip address (if you dont know what is ip-address and dont know how to find it do not root the device, you will mess the device up)
+> **Tip**
+> You'll find the ip address within Sonoff app settings or in your router dhcp clients view
+
+- Registrate your device with the eWeLink app just follow the device registration process
+- To gain ADB access tap on the device id quickly multiple times to enable developer mode
+- after you consider the adb agreement you will able to acces device through the adb command
 > **Warning**
-> Consequence of gaining ADB access the device won't get any official update and the device will be marked as rooted permanently.
- 
-## Install
-Unable to install third-part applications without gain ADB access.
+> If you accept the agreement you won't be able to revert it.Your device will be rooted forever. You wont get any new future updates forever. 
 
-- Download apk
-- adb install -r <filename>.apk
+> **Tip**
+> With my [RootTool](https://github.com/seaky/nspanel_pro_roottool_apk) app you can update your device
+
+- connect to device with adb
+
+start adb listen:
+```
+adb tcpip 5555
+```
+
+list devices
+```
+adb devices -l
+```
+
+connect device
+```
+adb connect <ip-address>
+```
+- Install a custom Launcher (see [Install Launcher](#install-custom-launcher))
+
+### Usefull ADB commands
+
+connect device
+```
+adb connect <ip-address>
+```
+
+list devices
+```
+adb devices -l
+```
+
+press home button
+```
+adb shell input keyevent 3
+```
+
+press power button
+```
+adb shell input keyevent 26
+```
+
+show notifications
+```
+adb shell cmd statusbar expand-notifications
+```
+
+install app
+```
+adb install <apk>
+```
+
+## Install custom launcher
+
+To handle the device more easily, you need to install a custom launcher.
+
+Download [UltraSmall Launcher](doc/assets/ultra-small-launcher.apk)
+- install and simulate home key press
+- select set "Launcher" as default
+
+## Install custom webview
+
+You dont need to instal Xposed as blackadder mentioned.
+Just simple download com.android.webview_108.0.5359.128.apk or any new version which supporst arm64-v8, armeabi-v7a **Lineageos version**!
+
+https://www.apkmirror.com/apk/lineageos/android-system-webview-2/
+
+install webview apk
+```
+adb install -r <webview>
+```
+
+
+## Install App
+
+- Download apk from releases section
+- adb install -r [filename.apk]
 
 ## Manual 2.x version
 ### main switch
