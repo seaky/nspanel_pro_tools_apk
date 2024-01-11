@@ -81,16 +81,16 @@ https://itead.cc/product/sonoff-nspanel-pro-smart-home-control-panel/
 - Download [ADB drivers](https://developer.android.com/studio/run/win-usb) and install.
 - Download [Android platform-tools](https://dl.google.com/android/repository/platform-tools-latest-windows.zip) unzip it to a folder.
 - Get device ip address (if you dont know what is ip-address and dont know how to find it do not root the device, you will mess the device up)
-> **Tip**
+> [!TIP]
 > You'll find the ip address within Sonoff app settings or in your router dhcp clients view
 
 - Registrate your device with the eWeLink app just follow the device registration process
 - To gain ADB access tap on the device id quickly multiple times to enable developer mode
 - after you consider the adb agreement you will able to acces device through the adb command
-> **Warning**
+> [!WARNING]
 > If you accept the agreement you won't be able to revert it.Your device will be rooted forever. You wont get any new future updates forever. 
 
-> **Tip**
+> [!TIP]
 > With my [RootTool](https://github.com/seaky/nspanel_pro_roottool_apk) app you can update your device
 
 - connect to device with adb
