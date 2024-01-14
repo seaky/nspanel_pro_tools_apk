@@ -243,6 +243,14 @@ Below the value the trigger event will be created
 #### Light sensor trigger above
 Above the value the trigger event will be created
 
+## tools tab
+### Autostart
+Autostart Other app after device restart
+#### Launch App after reboot
+Launch selected application after device rebott
+#### Wait for WIFI
+Start selected application after WIFI connection established
+
 ## settings tab
 ### Resume on boot
 Autostart NSPanelTools app after device restart
