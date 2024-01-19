@@ -21,18 +21,22 @@
 
 ### v2.0 (2024-01-xx - under testing)
 #### new features (see manual [Manual 2.x version](#manual-2x-version) )
-- 
-- code has been fully redesigned (easier to add new capabilites)
-- new Preference based UI (easier to add new capabilites)
-- screen allways on/off feature (https://github.com/seaky/nspanel_pro_tools_apk/issues/5, https://github.com/seaky/nspanel_pro_tools_apk/issues/14)
-- reboot device (https://github.com/seaky/nspanel_pro_tools_apk/issues/6)
-- change hostname (https://github.com/seaky/nspanel_pro_tools_apk/issues/8)
-- display sleep time setting
-- automatic brightness change based on lightsensor
+- code has been fully redesigned (see [Backward compatibility](#backward-compatibility))
+  - a lot easier to add new capabilites
+  - enables to add internal event listeners and therby make MQTT/HASS integration 
+- new Preference based UI
+  - a lot easier to add new UI elemens. Due to the small screen a scrollable view is much more convenient or usable
+- screen always on/off feature (https://github.com/seaky/nspanel_pro_tools_apk/issues/5, https://github.com/seaky/nspanel_pro_tools_apk/issues/14)
+- reboot device from app (https://github.com/seaky/nspanel_pro_tools_apk/issues/6)
+- change hostname from app (https://github.com/seaky/nspanel_pro_tools_apk/issues/8)
+- system display sleep time setting from app
+- predefinied brightness scenarios based on lightsensor trigger events
+- now automatically launched apps can wait for established wifi connection
 
 #### bugfixes
-- touch screen reader memoryleak fixed
+- touch-screen reader memoryleak fixed
 - request exclude app from battery optimization, helps to prevent app kill by system
+- wake-on-wave can be turned off
 
 ### v1.1 (2023-02-02)
 - added light sensor feature
@@ -147,16 +151,24 @@ adb install <apk>
 
 To handle the device more easily, you need to install a custom launcher.
 
-Download [UltraSmall Launcher](doc/assets/ultra-small-launcher.apk)
+Download [UltraSmall Launcher](https://drive.google.com/file/d/1iW6vWaGAjNTUO_Cs-2r-18j_468mU3oK/view?usp=drive_link)
 - install and simulate home key press
 - select set "Launcher" as default
 
 ## Install custom webview
 
-You dont need to instal Xposed as blackadder mentioned.
-Just simple download com.android.webview_108.0.5359.128.apk or any new version which supporst arm64-v8, armeabi-v7a **Lineageos version**!
+If you want to use Home Assistant companion app you must update factory provided webview component.
 
-https://www.apkmirror.com/apk/lineageos/android-system-webview-2/
+> [!TIP]
+> You dont need to instal Xposed root firmware as blackadder mentioned.
+
+Just simple download com.android.webview_108.0.5359.128.apk or any new version which supporst arm64-v8, armeabi-v7a on firmware above 1.5 **Lineageos version** can be installed!
+
+[WebView 108 for firmware >=1.5 ](https://drive.google.com/file/d/1fAO5daUOnUtNlg10KSUmz5feRImZaU9M/view?usp=drive_link)
+
+Under frimware version 1.5 you have two options, update firmware by my frimware updater or simply install this resigned version below.
+
+[WebView 108 for firmware <1.5 ](https://drive.google.com/file/d/1SL7e6uCesPOvakz_LmD829_IFYwK09kC/view?usp=drive_link)
 
 install webview apk
 ```
@@ -170,28 +182,39 @@ adb install -r <webview>
 - adb install -r [filename.apk]
 
 ## Manual 2.x version
+### backward compatibility
+version 2.x supports all v1.x features. Except the automatic brightness change which was experimental and replaced by light-level triggered brightness control see [Brightness category]
+(#brightness-category).
+> [!NOTE]
+> All configuration for v1.x is obsolete in 2.x therefore 2.x app must be reconfigured before use.
+
 ### main switch
 Main switch allows for the complete disabling of the application's functions. Controls the background activities. Purpose of being able to disable the whole app without uninstall.
 * active toggle
   * activates a background service which runs even if the app is "killed" from app-switcher
-  * off state turns all app features off including launch app after reboot
+  * off state turns all app features off including "launch app after reboot"
 
 ## display tab
+This tab groups all screen or display related configurations and features. Such as how and when to turn on and off or how bright is it. etc
+
+****
 ### wakeup category
+****
 Category for all wake-up related functions.
 
-Unfortunatelly this [AOSP](https://source.android.com/) build does not support wakeup device which causes that if official app is not running the device will go to deepsleep.
+Unfortunatelly this [AOSP 8.1](https://source.android.com/) build does not support wakeup device which causes that if official app is not running the device will go to deepsleep.
 Due to the lack of power button, just a hard reset (unplug) can wake up the device.
 
 #### Wake-on-wave
 Wake up the device by hand wave. 
 > [!NOTE]
 > Before turning it on, set up the sensor parameters on the sensor tab.
-
 #### Wake on touch
-Wake up the device by screen touch.
+Wake up the device by a simple screen touch or tap.
 
+**** 
 ### brightness category
+****
 Category for all brightness related functions.
 #### Brightness
 Set system level display brightness. On certain cases it is used to set if no light change event is triggered.
@@ -210,8 +233,9 @@ Set brightness to the given value if light-above event is triggered.
 
 #### Brightness on light-above seekbar
 Set brightness to the prescribed value.
-
+****
 ### screen category
+****
 Category for all screen related functions.
 #### Display sleep
 Set system level display sleep time. 
@@ -227,14 +251,19 @@ The time when the screen-on begins.
 The time when the screen-on ends.
 
 ## sensor tab
-### sensor proximity
+
+****
+### sensor proximity category
+****
 Category for proximity sensor related functions.
 #### Proximity sensor
 Proximity sensor live value shows actual sensor value and shows the trigger when it is activated.
 #### Proximity sensor trigger threshold
 Above the value the trigger event will be create
 
-### sensor light
+****
+### sensor light category
+****
 Category for proximity sensor related functions.
 #### Light sensor
 Light sensor live value shows actual sensor value and shows the trigger when it is activated.
@@ -244,12 +273,14 @@ Below the value the trigger event will be created
 Above the value the trigger event will be created
 
 ## tools tab
-### Autostart
-Autostart Other app after device restart
+****
+### autostart category
+****
+Autostart or launch other app after device restart
 #### Launch App after reboot
-Launch selected application after device rebott
+Launch selected application after device reboot
 #### Wait for WIFI
-Start selected application after WIFI connection established
+Start selected application after WIFI connection is established
 
 ## settings tab
 ### Resume on boot
