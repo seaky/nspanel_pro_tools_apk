@@ -1,10 +1,22 @@
 # NSPanel Pro Tools Application
 
+This application is a custom developed apk which allows devices running on the 
+- Smatek T6E variants
+  - Sonoff NSPanel Pro
+  - Zemismart T6E
+  - Avatto T6E
+  - Tuya T6E
+- or similar architecture 
+  
+to leverage certain features such as proximity sensor, light sensor, and Home Assistant integration.
+
+Application mainly tested on NSPanel Pro but may works on other devices.
+
 ## Table of contents
 
-- [Version history](#app-version-history)
-- [Device info](#sonoff-nspanel-pro)
-- [Device rooting and sideload](#device-rooting-and-sideload)
+- [App version history](#app-version-history)
+- [NSPanel Pro device info](#sonoff-nspanel-pro)
+- [NSPanel Pro device rooting and sideload](#device-rooting-and-sideload)
 - [Install custom launcher](#install-custom-launcher)
 - [Install custom webview](#install-custom-webview)
 - [Install app](#install-app)
