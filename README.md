@@ -31,7 +31,7 @@ Application mainly tested on NSPanel Pro but may works on other devices.
 - Gesture based HASS events
 - Gesture based wake-up
 
-### v2.0 (2024-01-xx - under testing)
+### v2.0 (2024-01-21)
 #### new features (see manual [Manual 2.x version](#manual-2x-version) )
 - code has been fully redesigned (see [Backward compatibility](#backward-compatibility))
   - a lot easier to add new capabilites
