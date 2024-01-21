@@ -12,6 +12,12 @@ to leverage certain features such as proximity sensor, light sensor, and Home As
 
 Application mainly tested on NSPanel Pro but may works on other devices.
 
+Donate me if you want:
+
+[![NSPanel Pro](doc/assets/P_1.png)](https://www.paypal.com/paypalme/seaky77/1EUR)
+[![NSPanel Pro](doc/assets/P_5.png)](https://www.paypal.com/paypalme/seaky77/5EUR)
+[![NSPanel Pro](doc/assets/P_10.png)](https://www.paypal.com/paypalme/seaky77/10EUR)
+
 ## Table of contents
 
 - [App version history](#app-version-history)
