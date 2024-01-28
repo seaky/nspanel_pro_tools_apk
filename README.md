@@ -37,6 +37,13 @@ Donate me if you want:
 - Gesture based HASS events
 - Gesture based wake-up
 
+### v2.0.1 (2024-01-28)
+#### bugfixes
+- Restart app after reboot does not work (https://github.com/seaky/nspanel_pro_tools_apk/issues/49)
+- Display sleep time UI refresh bug (https://github.com/seaky/nspanel_pro_tools_apk/
+issues/47)
+- Misleading screen-on begin time calculation (https://github.com/seaky/nspanel_pro_tools_apk/issues/44)
+
 ### v2.0 (2024-01-21)
 #### new features (see manual [Manual 2.x version](#manual-2x-version) )
 - code has been fully redesigned (see [Backward compatibility](#backward-compatibility))
