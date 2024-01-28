@@ -40,8 +40,7 @@ Donate me if you want:
 ### v2.0.1 (2024-01-28)
 #### bugfixes
 - Restart app after reboot does not work (https://github.com/seaky/nspanel_pro_tools_apk/issues/49)
-- Display sleep time UI refresh bug (https://github.com/seaky/nspanel_pro_tools_apk/
-issues/47)
+- Display sleep time UI refresh bug (https://github.com/seaky/nspanel_pro_tools_apk/issues/47)
 - Misleading screen-on begin time calculation (https://github.com/seaky/nspanel_pro_tools_apk/issues/44)
 
 ### v2.0 (2024-01-21)
