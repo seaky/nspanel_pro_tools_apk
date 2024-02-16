@@ -34,15 +34,23 @@ Donate me if you want:
 Actual plan is to have a release in every Quarter.
 
 ### v2.2.0 (2024-Q3)
-- ?
+- add double, triple tap gesture detection (alpha implemented)
+- add multitouch gesture detection (PoC)
+- add navigation bar toggle by gesture (alpha implemented)
+- add scheduled reboot
+- set screensaver brightness
+- zigbee gateway integration (under development)
+- HA commands (pre-alpha implemented)
 
-### v2.1.0 (2024-04-01)
-It is now finished under testing...
+### v2.1.0 (2024-03-15)
+New release date, closer and closer...
+
+Under beta test... thanks for the testers
 
 #### new features (see updated manual [Manual 2.x version](#manual-2x-version) )
 - [Touch gestures on dark screen](#wake-on-gesture-v21) (https://github.com/seaky/nspanel_pro_tools_apk/issues/27)
 - [Wake up from Screen Saver](#wake-from-screensaver-v21) (https://github.com/seaky/nspanel_pro_tools_apk/issues/52)
-- [Prevent turn off / Dim screen](#prevent-turn-off-v21) (https://github.com/seaky/nspanel_pro_tools_apk/issues/40)
+- [Display sleep mode](#display-sleep-mode-v21) (https://github.com/seaky/nspanel_pro_tools_apk/issues/40)
 - [Different Screen-on at weekdays and weekends](#screen-on-begin-on-weekdays-v21) (https://github.com/seaky/nspanel_pro_tools_apk/issues/36)
 - [Switch to selected App](#switch-to-app) (https://github.com/seaky/nspanel_pro_tools_apk/issues/46)
 - [Home on gesture](#home-on-gesture-v21)
@@ -225,6 +233,16 @@ adb install -r <webview>
 
 ## Manual 2.x version
 
+- [backward compatibility](#backward-compatibility)
+- [main switch](#main-switch)
+- [display menu](#display-tab)
+- [sensor menu](#sensor-tab)
+- [tools menu](#tools-tab)
+- [integration menu](#integration-tab-v21)
+- [settings menu](#settings-tab)
+- [Home Assistant](#home-assistant-integration)
+- [Example configuration](#example-configuration)
+
 > [!NOTE]
 > If the version number is marked, then it is only valid for that version.
 
@@ -302,8 +320,12 @@ Category for all (lcd) screen related functions.
 #### Display sleep
 Set system level display sleep time. After the prescribed interval the screen will be turned off if another function does not override it, for example: Prevent turn off or Screen begin
 
-#### Prevent turn off (v2.1)
-Prevents the screen from completly turning off while retaining the dim feature
+#### Display sleep mode (v2.1)
+Defines the sleep mode behaviour
+- Screen off
+  - completely turn the screen off, touch gestures only available in this mode
+- Screen dim
+  - after prescribed Display sleep time the screen will dim
 
 #### Screen-on time swicth
 During a predefinied period it turns on the screen and it remains on untile the end of the interval.
@@ -455,6 +477,151 @@ Changes log level to debug
 #### Verbos mode
 Changes log level to verbose
 
+### Home Assistant integration
+
+Integration based on HA official MQTT module. 
+
+> [!IMPORTANT]
+> Currently MQTT Support only non SSL connections.
+
+Configured device data:
+- name
+- unique id
+- manufacturer
+- model
+- firmware version
+
+Device entities are unique thus generated entity name can be renamed anytime.
+
+#### Entities
+If an event has not been sent the value is unknown
+
+#### Diagnostic Sensor
+- Sends IP Address string once a day every 24h.
+- Receives availability information, if the "eye" icon is gray the device is offline
+
+#### Proximity Event
+Sends event when the proximity sensor trigger is occured.
+Event values: 
+- triggered
+
+#### Touch Event
+Sends event when the touch event is triggered. 
+
+> [!IMPORTANT]
+> Touch events can only be triggered when the screen is off.
+
+Event values: 
+- tap
+- swipe_up
+- swipe_down
+- swipe_left
+- swipe_right
+
+#### Light Event
+Sends light sensor triggers is occured.
+Event values: 
+- light_above
+- light_below
+- light_undefinied
+
+#### Command topic (v2.2)
+- reboot device
+- sleep
+- wake_up
+- play custom audio
+
+## Example configuration
+
+### Device config
+- wake on wave: on
+- wake on gesture: off
+- wake from screen saver: off
+- brightness: 100
+- brightness on light-below: true
+- brightness on light-below: 0
+- brightness on light-above: true
+- brightness on light-below: 100
+- display sleep: 15
+- prevent turn off: off
+- screen-on time: on
+- screen-on time begin weekdays: 07:00
+- screen-on time end weekdays: 09:00
+- screen-on time begin weekends: 08:00
+- screen-on time end weekends: 10:00
+- launch app after reboot: Home Assistant
+- wait for wifi: on
+- home on gesture: swipe-right
+- mqtt enable: on
+- publish events: tap, swipe-up, swipe-down, swipe-left
+- ha integration: on
+- auido feddback: on
+- resume on reboot: on
+- hostname: nspanel#
+- debug: off
+
+### HASS Example uses-cases
+- Room: Automation for touch events, every room has its own automation
+  - swipe_up: shutter open
+  - swipe_down: shutter close
+  - tap: shutter stop
+  - swipe_left: turn light on / off
+  - proximity: wake up device
+
+- Entrance: Special configuration for home entrance
+  - swipe_up: I'm home -> shutters up, air vent on
+  - swipe_down: Leave home -> electricity off, shutters close
+  - swipe_right: #1 garage door open/closew
+  - swipe_left: #2 garage door open/close
+  - tap: wake up device
+  - proximity: wake up device
+
+#### Automation sample yaml
+```alias: bedroom_device2
+description: "bedroom nspanel2 automation"
+trigger:
+  - platform: state
+    entity_id:
+      - event.nspanel2_touch
+    attribute: event_type
+condition: []
+action:
+  - choose:
+      - conditions:
+          - condition: state
+            entity_id: event.nspanel2_touch
+            attribute: event_type
+            state: swipe_up
+        sequence:
+          - service: cover.open_cover
+            target:
+              entity_id:
+                - cover.rollershutter_0013
+              device_id: []
+              area_id: []
+            data: {}
+      - conditions:
+          - condition: state
+            entity_id: event.nspanel2_touch
+            attribute: event_type
+            state: swipe_down
+        sequence:
+          - service: cover.close_cover
+            target:
+              entity_id: cover.rollershutter_0013
+            data: {}
+      - conditions:
+          - condition: state
+            entity_id: event.nspanel2_touch
+            attribute: event_type
+            state: swipe_right
+        sequence:
+          - service: cover.stop_cover
+            target:
+              entity_id: cover.rollershutter_0013
+            data: {}
+mode: single
+```
 
 ## Manual 1.x version
 
