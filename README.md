@@ -45,6 +45,8 @@ Actual plan is to have a release in every Quarter.
 ### v2.1.0 (2024-03-15)
 New release date, closer and closer...
 
+![Countdown](https://i.countdownmail.com/34xxc9.gif)
+
 Under beta test... thanks for the testers
 
 #### new features (see updated manual [Manual 2.x version](#manual-2x-version) )
