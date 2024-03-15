@@ -33,22 +33,17 @@ Donate me if you want:
 ## App Version history
 Actual plan is to have a release in every Quarter.
 
-### v2.2.0 (2024-Q3)
-- add double, triple tap gesture detection (alpha implemented)
-- add multitouch gesture detection (PoC)
-- add navigation bar toggle by gesture (alpha implemented)
+### v2.2.0 (2024-05)
+- add double, triple tap gesture detection 
+- add multitouch gesture detection
+- add navigation bar toggle by gesture
 - add scheduled reboot
 - set screensaver brightness
-- zigbee gateway integration (under development)
-- HA commands (pre-alpha implemented)
+- zigbee gateway integration
+- HA commands
 
 ### v2.1.0 (2024-03-15)
-New release date, closer and closer...
-
-![Countdown](https://i.countdownmail.com/34xxc9.gif)
-
-Under beta test... thanks for the testers
-
+![NSPanel Pro](doc/assets/hun_nat_day_70.png)
 #### new features (see updated manual [Manual 2.x version](#manual-2x-version) )
 - [Touch gestures on dark screen](#wake-on-gesture-v21) (https://github.com/seaky/nspanel_pro_tools_apk/issues/27)
 - [Wake up from Screen Saver](#wake-from-screensaver-v21) (https://github.com/seaky/nspanel_pro_tools_apk/issues/52)
@@ -277,15 +272,13 @@ Due to the lack of power button, just a hard reset (unplug) can wake up the devi
 Wake up the device by hand wave. 
 > [!NOTE]
 > Before turning it on, set up the sensor parameters on the sensor tab.
-#### Wake on touch (v2.0)
-Wake up the device by a simple screen touch or tap.
 
-#### Wake on gesture (v2.1)
+#### Wake on gesture
 Wake up the device by touch gesture. Multiple gestures can be selected the behaviour will be the same it will wakes up the device.
 
 ![NSPanel Pro](doc/assets/app/display/sc1_1.png)
 
-#### Wake from ScreenSaver (v2.1)
+#### Wake from ScreenSaver
 Dismiss the ScreenSaver if it is active. Only works if wake-on-wave is enabled.
 
 **** 
@@ -322,25 +315,19 @@ Category for all (lcd) screen related functions.
 #### Display sleep
 Set system level display sleep time. After the prescribed interval the screen will be turned off if another function does not override it, for example: Prevent turn off or Screen begin
 
-#### Display sleep mode (v2.1)
+#### Display sleep mode
 Defines the sleep mode behaviour
 - Screen off
-  - completely turn the screen off, touch gestures only available in this mode
+  - completely turn the screen off
+  > [!IMPORTANT]
+  > touch gestures only available in this mode
 - Screen dim
   - after prescribed Display sleep time the screen will dim
 
 #### Screen-on time swicth
 During a predefinied period it turns on the screen and it remains on untile the end of the interval.
 
-#### Screen-on begin (v2.0)
-The time when the screen-on begins. 
-> [!TIP]
-> If the Begin time 00:00 and End time is also 00:00 the feature is.
-
-#### Screen-on end (v2.0)
-The time when the screen-on ends.
-
-#### Screen-on begin on weekdays (v2.1)
+#### Screen-on begin on weekdays
 The time when the screen-on begins on weekdays. 
 
 > [!TIP]
@@ -348,10 +335,10 @@ The time when the screen-on begins on weekdays.
 > If the weekend is disabled, weekdays will jump over weekends. So after friday the monday will be scheduled.
 > If the weekend is enabled, after friday the weekend intervall will take effect.
 
-#### Screen-on end on weekdays (v2.1)
+#### Screen-on end on weekdays
 The time when the screen-on ends.
 
-#### Screen-on begin on weekends (v2.1)
+#### Screen-on begin on weekends
 The time when the screen-on begins at weekends
 
 > [!TIP]
@@ -359,7 +346,7 @@ The time when the screen-on begins at weekends
 > If the weekdays is disabled, weekends will jump over weekdays. So after sunday the next saturday will be scheduled.
 > If the weekdays is enabled, after sunday the weekdays intervall will take effect.
 
-#### Screen-on end on weekends (v2.1)
+#### Screen-on end on weekends
 The time when the screen-on ends.
 
 ![NSPanel Pro](doc/assets/app/display/sc4.png)
@@ -410,19 +397,37 @@ Switch to selected application
 
 ![NSPanel Pro](doc/assets/app/tools/sc8.png)
 
-#### Home on gesture (v2.1)
-The selected gesture will switch to this application.
+#### Switch to launcher
+Switch to default launcher
 
-## integration tab (v2.1)
+#### Home on gesture
+The selected gesture will switch back to this application.
+
+## integration tab
 ****
 
 ![NSPanel Pro](doc/assets/app/integration/sc10.png)
-### mqtt category (v2.1)
+### zigbee category
+****
+Not yet available planned to v2.2
+
+### mqtt category
 ****
 Category for MQTT and HomeAssistant related settings
 
 #### State
 The current state of the connection.
+
+Possible states:
+- connecting
+  - initiating connection
+- connected
+  - connection established
+- disconnected
+  - no live connection
+- failure
+  - can not establish connection, retry every 5sec 
+
 #### Setup
 Setup MQTT Connection
 #### Enabled
@@ -436,14 +441,52 @@ If turned off the connection will be dissconnected. Turn on only if you setup co
 The current state of the connection.
 #### Publish events
 You can select the messages you want to publish on this channel. Only publish those that you really need.
+
+Currently supported events:
+- Trigger - proximity
+  - send if proximity triggered
+- Trigger - light-below
+  - send if light-below triggered
+- Trigger - light-above
+  - send if light-above triggered
+- Trigger - light-normal
+  - send if light value between below and above
+- Device - wake up
+  - send if device wake up triggered
+- Device - sleep
+  - send if device go to sleep, wont be triggered if Display sleep mode is Screen dim
+- Gesture - tap
+  - send if gesture detected, touch gesture only available when the screen is off
+- Gesture - swipe up
+  - send if gesture detected, touch gesture only available when the screen is off
+- Gesture - swipe down
+  - send if gesture detected, touch gesture only available when the screen is off
+- Gesture - swipe left
+  - send if gesture detected, touch gesture only available when the screen is off
+- Gesture - swipe right
+  - send if gesture detected, touch gesture only available when the screen is off
+
+
+
 #### Host
-MQTT server host name only non SSL is available in v2.1
+MQTTv3 server host name only non-SSL is available in v2.1
 #### Port
-MQTT server port only non SSL is available in v2.1
+MQTTv3 server port only non-SSL is available in v2.1
+#### ClienId
+MQTTv3 client id
 #### Username
 Configured username
 #### Password
 Configured password
+#### Use Hostname as Device Id
+Automaticall generated Device Id is not quite human friendly, Hostname can be used as deviceid. 
+
+> [!IMPORTANT]
+> Hostname must be set
+
+#### Device Id
+Unique device id
+
 #### HA Integration
 Enables MQTT Integration based integration, events and diagnostics are implemented.
 
@@ -451,8 +494,9 @@ Enables MQTT Integration based integration, events and diagnostics are implement
 
 #### HA Integration
 If enabled it sends configuration message to the proper topics
-#### Device Id
-Unique device id
+> [!TIP]
+> In case of configuration trouble, off-on will reconfigure the HA endpoint
+
 #### Topic prefix
 Topic prefix usually homeassistant the default
 
@@ -462,7 +506,7 @@ Topic prefix usually homeassistant the default
 ****
 
 ![NSPanel Pro](doc/assets/app/settings/sc14.png)
-### Audio feedback (v2.1)
+### Audio feedback
 Plays audio on certain events such as identified touch gestures on in order to provide audio-based feedback.
 ### Resume on boot
 Autostart NSPanelTools app after device restart
@@ -478,6 +522,8 @@ Changes the device hostname
 Changes log level to debug
 #### Verbos mode
 Changes log level to verbose
+#### View log
+Display app log
 
 ### Home Assistant integration
 
