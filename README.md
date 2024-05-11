@@ -44,27 +44,33 @@ Actual plan is to have a release in every Quarter.
 - voice based commands
 - mqttv5 ssl
 
-### v2.2.0 (2024-05)
+### v2.3.0 (2024-0x)
 #### new features
 - Zigbee gateway integration
   - possibility to change between router and coordinator mode
+- Gesture
+  - multitouch gesture detection
+
+### v2.2.0 (2024-05)
+I have to postpone some new features to 2.3.0 due to their incompleteness.
+
+#### new features
 - HA commands
   - wake_up device
   - sleep device
   - reboot device
   - switch to launcher
-  - enbable adb
+  - enbable/disable adb
 - Gesture
   - double, triple tap gesture detection 
-  - multitouch gesture detection
 - System enhancement
   - navigation bar by swipe
   - notification bar by swipe
 - Scheduled reboot
 - Application watchdog
 #### improvements
-- mqttv5 client
-- switch to local broadcast
+- mqttv5 client, enabler for ssl and zigbee
+- switch to local broadcast, perf optimization
 - increase auto test covarage
 #### bugfixes
 - Crash when changing mqtt config (https://github.com/seaky/nspanel_pro_tools_apk/issues/82)
@@ -416,8 +422,21 @@ Autostart or launch other app after device restart
 Launch selected application after device reboot
 #### Wait for WIFI
 Start selected application after WIFI connection is established
+#### Whatchdog
+Monitoring selected app daily if it is not running, then it starts it.
 #### Switch to app
 Switch to selected application
+
+### system ui (in 2.2.0)
+****
+#### NavigationBar
+Always shows the system level navigation bar.
+
+#### NavigationBar on swipe up
+Available if NavigationBar is turned off. An edge swipe up enables the navigation bar for X seconds.
+
+#### NotificationBar on swipe down
+Shows the system level notification bar by edge swipe down. Originally it is disabled in Sonoff system.
 
 ### other
 ****
