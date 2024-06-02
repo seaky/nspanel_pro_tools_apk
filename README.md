@@ -51,8 +51,14 @@ Actual plan is to have a release in every Quarter.
 - Gesture
   - multitouch gesture detection
 
-### v2.2.0 (2024-05)
+### v2.2.0 (2024-06)
+#### 2024.05.11:
 I have to postpone some new features to 2.3.0 due to their incompleteness.
+
+#### 2024.06.02:
+> [!IMPORTANT]
+> Due to an important featrure breaking fw change which this issue [#91](https://github.com/seaky/nspanel_pro_tools_apk/issues/91) brought to my attention I had to make effort to investigate. FW Over 1.10.0 wont support touch gestures. On 2.3.0 I'll come up with an alternative solution. I also grab the oportunity to emphasise here if your are an android user do not update your fw. There is no reason to do that. I live with 10 device with 1.5.0 and they do not require maintenance.
+I postponed the release to 2024-06
 
 #### new features
 - HA commands
