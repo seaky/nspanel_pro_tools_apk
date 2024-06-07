@@ -51,14 +51,11 @@ Actual plan is to have a release in every Quarter.
 - Gesture
   - multitouch gesture detection
 
-### v2.2.0 (2024-06)
-#### 2024.05.11:
-I have to postpone some new features to 2.3.0 due to their incompleteness.
+### v2.2.0 (2024-06-14)
 
-#### 2024.06.02:
-> [!IMPORTANT]
-> Due to an important featrure breaking fw change which this issue [#91](https://github.com/seaky/nspanel_pro_tools_apk/issues/91) brought to my attention I had to make effort to investigate. FW Over 1.10.0 wont support touch gestures. On 2.3.0 I'll come up with an alternative solution. I also grab the oportunity to emphasise here if your are an android user do not update your fw. There is no reason to do that. I live with 10 device with 1.5.0 and they do not require maintenance.
-I postponed the release to 2024-06
+New release date
+
+![Countdown](https://i.countdownmail.com/34xxc9.gif)
 
 #### new features
 - HA commands
@@ -66,19 +63,22 @@ I postponed the release to 2024-06
   - sleep device
   - reboot device
   - switch to launcher
-  - enbable/disable adb
+  - enbable adb
+- - control sw1,sw2 built-in switches
 - Gesture
-  - double, triple tap gesture detection 
+  - double, triple tap gesture detection (only available firmware under 1.11.0) 
 - System enhancement
-  - navigation bar by swipe
-  - notification bar by swipe
+  - navigation bar by swipe up
+  - notification bar by swipe down
 - Scheduled reboot
 - Application watchdog
 #### improvements
-- mqttv5 client, enabler for ssl and zigbee
-- switch to local broadcast, perf optimization
-- increase auto test covarage
+- json serialization was fully rewritten, enabler for device provisioning
+- mqttv5 client was implemented, enabler for ssl and zigbee
+- switched to local broadcast, perf optimization
+- auto test covarage was increased
 #### bugfixes
+- Crash when setup mqtt and main switch is off
 - Crash when changing mqtt config (https://github.com/seaky/nspanel_pro_tools_apk/issues/82)
 
 ### v2.1.0 (2024-03-15)
@@ -314,6 +314,8 @@ Wake up the device by hand wave.
 
 #### Wake on gesture
 Wake up the device by touch gesture. Multiple gestures can be selected the behaviour will be the same it will wakes up the device.
+> [!IMPORTANT]
+> FW Over 1.10.0 wont support touch gestures.
 
 ![NSPanel Pro](doc/assets/app/display/sc1_1.png)
 
@@ -517,7 +519,7 @@ Currently supported events:
   - send if gesture detected, touch gesture only available when the screen is off
 - Gesture - swipe right
   - send if gesture detected, touch gesture only available when the screen is off
-
+#### Enable commands
 
 
 #### Host
