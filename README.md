@@ -53,9 +53,12 @@ Actual plan is to have a release in every Quarter.
 
 ### v2.2.0 (2024-06-14)
 
-New release date
+Release is dedicated to:
 
-![Countdown](https://i.countdownmail.com/34xxc9.gif)
+![US FLAG DAY](doc/assets/us_flag_day.png)
+
+[U.S. Flag day](https://en.wikipedia.org/wiki/Flag_Day_(United_States))
+
 
 #### new features
 - HA commands
@@ -82,7 +85,12 @@ New release date
 - Crash when changing mqtt config (https://github.com/seaky/nspanel_pro_tools_apk/issues/82)
 
 ### v2.1.0 (2024-03-15)
-![NSPanel Pro](doc/assets/hun_nat_day_70.png)
+
+Release is dedicated to:
+
+![HUN NATIONAL DAY](doc/assets/hun_nat_day_70.png)
+
+[Hungarian Revolution day](https://en.wikipedia.org/wiki/Hungarian_Revolution_of_1848)
 #### new features (see updated manual [Manual 2.x version](#manual-2x-version) )
 - [Touch gestures on dark screen](#wake-on-gesture) (https://github.com/seaky/nspanel_pro_tools_apk/issues/27)
 - [Wake up from Screen Saver](#wake-from-screensaver) (https://github.com/seaky/nspanel_pro_tools_apk/issues/52)
