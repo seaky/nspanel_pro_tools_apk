@@ -51,6 +51,15 @@ Actual plan is to have a release in every Quarter.
 - Gesture
   - multitouch gesture detection
 
+### v2.2.1 (2024-06-23)
+
+### improvements
+- added Device Admin permission request in order to sleep the device via MQTT [Issue #103](https://github.com/seaky/nspanel_pro_tools_apk/issues/103)
+
+#### bugfixes
+- Fixed compatiblity issue with other launchers such as Lawnchair [Issue #104](https://github.com/seaky/nspanel_pro_tools_apk/issues/104)
+- It has been made possible to connect MQTT with empty username/password pair [Issue #105](https://github.com/seaky/nspanel_pro_tools_apk/issues/105)
+
 ### v2.2.0 (2024-06-14)
 
 Release is dedicated to:
