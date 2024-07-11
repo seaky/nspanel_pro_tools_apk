@@ -51,6 +51,11 @@ Actual plan is to have a release in every Quarter.
 - Gesture
   - multitouch gesture detection
 
+### v2.2.2 (2024-07-11)
+
+#### bugfixes
+- When Scheduled Reboot is activated, app repeatedly closes itself [Issue #113](https://github.com/seaky/nspanel_pro_tools_apk/issues/113)
+
 ### v2.2.1 (2024-06-23)
 
 ### improvements
