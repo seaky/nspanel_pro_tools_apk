@@ -60,6 +60,9 @@ Convenience update due to the release of a new device 120p
 - Set display rotation
 - Control Screen-on screen dim behaviour
 
+#### bugfixes
+- Proximity wake-up no longer working after wake-up signal is sent via MQTT [Issue #115](https://github.com/seaky/nspanel_pro_tools_apk/issues/115)
+
 ### v2.2.2 (2024-07-11)
 
 #### bugfixes
