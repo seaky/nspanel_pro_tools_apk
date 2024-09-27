@@ -44,12 +44,21 @@ Actual plan is to have a release in every Quarter.
 - voice based commands
 - mqttv5 ssl
 
-### v2.3.0 (2024-0x)
+### v2.3.0 (2024-xx)
 #### new features
 - Zigbee gateway integration
   - possibility to change between router and coordinator mode
 - Gesture
   - multitouch gesture detection
+
+### v2.2.3 (2024-09-27)
+
+Convenience update due to the release of a new device 120p
+
+#### new features
+- Support of 120p
+- Set display rotation
+- Control Screen-on screen dim behaviour
 
 ### v2.2.2 (2024-07-11)
 
