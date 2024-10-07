@@ -51,6 +51,14 @@ Actual plan is to have a release in every Quarter.
 - Gesture
   - multitouch gesture detection
 
+### v2.2.4 (2024-10-07)
+
+
+#### bugfixes
+- Wake on Wave for Screensaver does not work [Issue #145](https://github.com/seaky/nspanel_pro_tools_apk/issues/145)
+- Pro Tools keep crashing on tap after screen off [Issue #143](https://github.com/seaky/nspanel_pro_tools_apk/issues/143)
+- Proximity sensor trigger label on sensor tab keeps visible after trigger
+
 ### v2.2.3 (2024-09-27)
 
 Convenience update due to the release of a new device 120p
