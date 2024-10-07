@@ -59,6 +59,9 @@ Actual plan is to have a release in every Quarter.
 - Pro Tools keep crashing on tap after screen off [Issue #143](https://github.com/seaky/nspanel_pro_tools_apk/issues/143)
 - Proximity sensor trigger label on sensor tab keeps visible after trigger
 
+> **Note**
+> Wake-on-Screensaver toggle has been removed because the new wake-on-wave method handles as well
+
 ### v2.2.3 (2024-09-27)
 
 Convenience update due to the release of a new device 120p
