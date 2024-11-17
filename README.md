@@ -39,24 +39,48 @@ Actual plan is to have a release in every Quarter.
   - proxy devices to mqtt
 - Automatic App updater
 - HA commands
-  - json based device configuration
-  - play audio
+    - play audio
 - voice based commands
 - mqttv5 ssl
 
-### v2.3.0 (2024-xx)
+### v2.3.0 (2024-11-19)
+
+Release is dedicated to:
+
+![MEN POWER](doc/assets/happy_mom_names_day_95.png)
+- Happy name day to my Mom ( a celebration widespread in European culture)
+
 #### new features
-- Zigbee gateway integration
+- [Zigbee gateway integration](#zigbee-category) - [Feature Request #39](https://github.com/seaky/nspanel_pro_tools_apk/issues/39)
+  - (The end of a long research, but the beginning of a long adventure)
   - possibility to change between router and coordinator mode
-- Gesture
-  - multitouch gesture detection
+  - custom firmware feature still not available but Beta will be available soon
+- [Remote / MQTT app configuration](#commands) - [Feature Request #109](https://github.com/seaky/nspanel_pro_tools_apk/issues/109)
+- Wake on network error. If network error occurs it assits to the OS to reconnect. - [Feature Request #154](https://github.com/seaky/nspanel_pro_tools_apk/issues/154)
+- Free usage of light sensor events - [Feature Request #101](https://github.com/seaky/nspanel_pro_tools_apk/issues/101)
+- Set sleep time via MQTT - [Feature Request #107](https://github.com/seaky/nspanel_pro_tools_apk/issues/107)
+- Switch to default app via MQTT - [Feature Request #106](https://github.com/seaky/nspanel_pro_tools_apk/issues/106)
+
+#### improvements
+- MqttClient has been optimzed and refactored
+- MqttModule has been heavily refactored in order to support Zigbee
+- App configuration method has been completly rewritten in order to support json based configuration
+- Integration fragment has been completly rewritten in order to support multiple mqtt connection
+- Settings tab now displays Device Info
+- Introduce PowerManagement module to enable wakeup device temporary or permanently
+
+### bugfixes
+- Module manager start order was not correct
+- MQTT Lightsensor light_normal event was not handled correctly
+- IP Address is not reported correctly - [Issue #108](https://github.com/seaky/nspanel_pro_tools_apk/issues/108)
+
 
 ### v2.2.4 (2024-10-07)
 
 
 #### bugfixes
-- Wake on Wave for Screensaver does not work [Issue #145](https://github.com/seaky/nspanel_pro_tools_apk/issues/145)
-- Pro Tools keep crashing on tap after screen off [Issue #143](https://github.com/seaky/nspanel_pro_tools_apk/issues/143)
+- Wake on Wave for Screensaver does not work - [Issue #145](https://github.com/seaky/nspanel_pro_tools_apk/issues/145)
+- Pro Tools keep crashing on tap after screen off - [Issue #143](https://github.com/seaky/nspanel_pro_tools_apk/issues/143)
 - Proximity sensor trigger label on sensor tab keeps visible after trigger
 
 > **Note**
@@ -72,21 +96,21 @@ Convenience update due to the release of a new device 120p
 - Control Screen-on screen dim behaviour
 
 #### bugfixes
-- Proximity wake-up no longer working after wake-up signal is sent via MQTT [Issue #115](https://github.com/seaky/nspanel_pro_tools_apk/issues/115)
+- Proximity wake-up no longer working after wake-up signal is sent via MQTT - [Issue #115](https://github.com/seaky/nspanel_pro_tools_apk/issues/115)
 
 ### v2.2.2 (2024-07-11)
 
 #### bugfixes
-- When Scheduled Reboot is activated, app repeatedly closes itself [Issue #113](https://github.com/seaky/nspanel_pro_tools_apk/issues/113)
+- When Scheduled Reboot is activated, app repeatedly closes itself - [Issue #113](https://github.com/seaky/nspanel_pro_tools_apk/issues/113)
 
 ### v2.2.1 (2024-06-23)
 
 ### improvements
-- added Device Admin permission request in order to sleep the device via MQTT [Issue #103](https://github.com/seaky/nspanel_pro_tools_apk/issues/103)
+- added Device Admin permission request in order to sleep the device via MQTT - [Issue #103](https://github.com/seaky/nspanel_pro_tools_apk/issues/103)
 
 #### bugfixes
-- Fixed compatiblity issue with other launchers such as Lawnchair [Issue #104](https://github.com/seaky/nspanel_pro_tools_apk/issues/104)
-- It has been made possible to connect MQTT with empty username/password pair [Issue #105](https://github.com/seaky/nspanel_pro_tools_apk/issues/105)
+- Fixed compatiblity issue with other launchers such as Lawnchair - [Issue #104](https://github.com/seaky/nspanel_pro_tools_apk/issues/104)
+- It has been made possible to connect MQTT with empty username/password pair - [Issue #105](https://github.com/seaky/nspanel_pro_tools_apk/issues/105)
 
 ### v2.2.0 (2024-06-14)
 
@@ -119,7 +143,7 @@ Release is dedicated to:
 - auto test covarage was increased
 #### bugfixes
 - Crash when setup mqtt and main switch is off
-- Crash when changing mqtt config (https://github.com/seaky/nspanel_pro_tools_apk/issues/82)
+- Crash when changing mqtt config [Issue #82](https://github.com/seaky/nspanel_pro_tools_apk/issues/82)
 
 ### v2.1.0 (2024-03-15)
 
@@ -364,8 +388,12 @@ Wake up the device by touch gesture. Multiple gestures can be selected the behav
 
 ![NSPanel Pro](doc/assets/app/display/sc1_1.png)
 
-#### Wake from ScreenSaver
+#### Wake from ScreenSaver (removed from v2.2.4 wake-on-wave now dismiss screensavers)
 Dismiss the ScreenSaver if it is active. Only works if wake-on-wave is enabled.
+
+#### Wake on network error
+Wakes the device up if network connection is lost to assist reconnection. 
+
 
 **** 
 ### brightness category
@@ -508,7 +536,55 @@ The selected gesture will switch back to this application.
 ![NSPanel Pro](doc/assets/app/integration/sc10.png)
 ### zigbee category
 ****
-Not yet available planned to v2.2
+Category for Zigbee related settings
+#### State
+The current state of the connection.
+
+Possible states:
+- connecting
+  - initiating connection
+- online
+  - connection established to on-device Zigbee stack
+- offline
+  - on-device Zigbee is not available or offline
+- failure
+  - can not establish connection to Zigbee stack, retry every 5sec 
+
+#### Setup
+Setup Zigbee related settings
+
+#### Role
+Shows device roles see Setup section
+
+#### Zigbee Setup
+
+#### State
+The current state of the connection.
+
+Possible states:
+- connecting
+  - initiating connection
+- online
+  - connection established to on-device Zigbee stack
+- offline
+  - on-device Zigbee is not available or offline
+- failure
+  - can not establish connection to Zigbee stack, retry every 5sec 
+
+#### Role
+Change Zigbee device role
+
+Coordinator:
+- act as Zigbee coordinator, devices can be paired via Official Applications
+
+Repeater:
+- act as Zigbee Repeater or Router. Pairing is available.
+
+#### Pairing
+
+Put device to pairing mode for 180 sec after timeout it will turn off automatically.
+Allows other Coordinators to pair with this device and integrate it into their own mesh network as a Repeater/Router.
+
 
 ### mqtt category
 ****
@@ -647,10 +723,43 @@ If an event has not been sent the value is unknown
 - Sends IP Address string once a day every 24h.
 - Receives availability information, if the "eye" icon is gray the device is offline
 
+###### MQTT availability status
+Topic: nspanelpro/\<devicename>/status
+
+Values: 
+- online
+- offline
+
+###### MQTT started status
+Topic: nspanelpro/\<devicename>/state/started_at
+
+Payload: 
+- {"started_at":\<utc time>}
+
+###### MQTT scheduled reboot status
+Topic: nspanelpro/\<devicename>/state/scheduled_reboot_at
+
+Payload: 
+- {"scheduled_reboot_at":\<utc time>}
+
+###### MQTT ip address
+Topic: nspanelpro/\<devicename>/state/ip_address
+
+Payload: 
+- {"ip_address":\<ip>}
+
 #### Proximity Event
 Sends event when the proximity sensor trigger is occured.
-Event values: 
+
+###### MQTT
+Topic: nspanelpro/\<devicename>/event/proximity
+
+Payload: 
+{"event_type":\<values>}
+
+Values: 
 - triggered
+
 
 #### Touch Event
 Sends event when the touch event is triggered. 
@@ -658,7 +767,13 @@ Sends event when the touch event is triggered.
 > [!IMPORTANT]
 > Touch events can only be triggered when the screen is off.
 
-Event values: 
+###### MQTT
+Topic: nspanelpro/\<devicename>/event/touch
+
+Payload: 
+{"event_type":\<values>}
+
+Values: 
 - tap
 - swipe_up
 - swipe_down
@@ -667,16 +782,74 @@ Event values:
 
 #### Light Event
 Sends light sensor triggers is occured.
-Event values: 
+
+###### MQTT
+Topic: nspanelpro/\<devicename>/event/light
+
+Payload: 
+{"event_type":\<values>}
+
+Values: 
 - light_above
 - light_below
-- light_undefinied
+- light_normal
 
-#### Command topic (v2.2)
-- reboot device
-- sleep
-- wake_up
-- play custom audio
+#### Commands
+Proceeds various action on the device.
+
+###### MQTT
+Topic: nspanelpro/\<devicename>/command/device
+
+Payload: 
+{"command":\<command>}
+
+###### Available commands
+- default_app: switch to default selected app
+- launcher: switch to launcher
+- wake_up: wakes up the device
+- sleep: sleeps device immediately
+- reboot: Should send 3 times in a row to reboot the device.
+- adb: Enables on device ADB
+
+#### Turn switches
+Turn on device GPIO switches.
+
+###### MQTT
+Topic: nspanelpro/\<devicename>/command/\<switch>
+
+Switches:
+- switch_1
+- swicth_2
+
+Payload: 
+{"state":\<state>}
+
+###### Available states
+- on: turn switch on
+- off: turn switch off
+
+#### Device configuration
+Enables query and update nspanel tool apps configuration.
+
+###### MQTT Answer
+Topic: nspanelpro/\<devicename>/config
+
+###### MQTT Query
+The application configuration can be queried.
+
+Topic: nspanelpro/\<devicename>/config/query
+
+Payload: 
+- empty: query all configuration includeing defaults
+- filter: specific configuration values can be queried. Payload form is : { \<configuration_item>:null }
+
+###### MQTT Update
+Updates the application configuration.
+
+Topic: nspanelpro/\<devicename>/config/update
+
+Payload: 
+{ \<configuration_item>:\<value> }
 
 ## Example configuration
 
