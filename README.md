@@ -43,6 +43,15 @@ Actual plan is to have a release in every Quarter.
 - voice based commands
 - mqttv5 ssl
 
+### v2.3.1 (2024-11-20)
+
+#### hotfix
+- v2.3.0 crashes on devices other than NSPanel Pro, such as my S6E. - [Issue #145](https://github.com/seaky/nspanel_pro_tools_apk/issues/156)
+- MQTT Client errors were not correctly handled
+
+#### new features
+- ability to turn on/off zigbee feature - default is off
+
 ### v2.3.0 (2024-11-19)
 
 Release is dedicated to:
