@@ -43,6 +43,9 @@ Actual plan is to have a release in every Quarter.
 - voice based commands
 - mqttv5 ssl
 
+### v2.3.2 Beta1 (2024-11-29)
+- Beta is available, [see the details here](https://github.com/seaky/nspanel_pro_tools_apk/discussions/164) 
+
 ### v2.3.1 (2024-11-20)
 
 #### hotfix
