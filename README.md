@@ -35,16 +35,27 @@ Actual plan is to have a release in every Quarter.
 
 ### v2.x.0 (2024-xx)
 - set screensaver brightness
-- Zigbee gateway integration
-  - proxy devices to mqtt
 - Automatic App updater
 - HA commands
     - play audio
 - voice based commands
-- mqttv5 ssl
+- mqttv5 ssl/tls
+
+### v2.3.2 Beta3 (2025-01-04)
+- New Beta3 is available, [see the details here](https://github.com/seaky/nspanel_pro_tools_apk/discussions/164) 
+
+#### changed
+- package installer has been fully rewritten
+- packages are configurable at /data/local/nspanel_tools_pkg/\<package type\>/config
+- beta1-2 packages has been deleted due to compatibility
+
+#### new features
+- zigbee2mqtt package is now available to install
+- ability to monitor/report gpio changes - default is off
+  - available on sensor page
 
 ### v2.3.2 Beta1 (2024-11-29)
-- Beta is available, [see the details here](https://github.com/seaky/nspanel_pro_tools_apk/discussions/164) 
+- Beta1 is available, [see the details here](https://github.com/seaky/nspanel_pro_tools_apk/discussions/164) 
 
 ### v2.3.1 (2024-11-20)
 
