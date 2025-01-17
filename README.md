@@ -41,6 +41,31 @@ Actual plan is to have a release in every Quarter.
 - voice based commands
 - mqttv5 ssl/tls
 
+### v2.3.2 (2025-01-18)
+
+Release is dedicated to:
+
+![NATIONAL WINNIE THE POOH DAY](doc/assets/natiaonal_wp_day.png)
+
+[National Winnie The Pooh Day](https://en.wikipedia.org/wiki/Winnie-the-Pooh)
+
+#### new features
+- zstack packages are available currently: Sonoff, z2m
+- ability to monitor/report gpio changes - default is off
+  - available on sensor page
+- armv7 support added
+
+#### bugfixes
+- Fixed [Brightness sometimes set to 0 even if light-events are not used](https://github.com/seaky/nspanel_pro_tools_apk/issues/178)
+- Fixed [Display sleep mode not working](https://github.com/seaky/nspanel_pro_tools_apk/issues/176)
+
+#### Thanks to beta-testers![heart](doc/assets/giphy_heart_24.gif)
+Special thanks to the beta testers for their thorough and prompt testing, as well as their patience.
+
+- maodun96
+- pvklink
+
+
 ### v2.3.2 Beta3 (2025-01-04)
 - New Beta3 is available, [see the details here](https://github.com/seaky/nspanel_pro_tools_apk/discussions/164) 
 
@@ -247,7 +272,7 @@ issues/47)
 - first release
 - support wakeup on proximity sensor trigger
 
-## Sonoff NSPanel Pro
+# Sonoff NSPanel Pro
 
 Sonoff NSPanel Pro is a smart home control panel which based on Android 8.1 Oreo (AOSP) system.
 
@@ -256,9 +281,9 @@ Sonoff NSPanel Pro is a smart home control panel which based on Android 8.1 Oreo
 Device info:
 https://itead.cc/product/sonoff-nspanel-pro-smart-home-control-panel/
 
-## Device rooting and sideload
+# Device rooting and sideload
 
-### Gaining ADB access
+## Gaining ADB access
 
 - Download [ADB drivers](https://developer.android.com/studio/run/win-usb) and install.
 - Download [Android platform-tools](https://dl.google.com/android/repository/platform-tools-latest-windows.zip) unzip it to a folder.
@@ -293,7 +318,7 @@ adb connect <ip-address>
 ```
 - Install a custom Launcher (see [Install Launcher](#install-custom-launcher))
 
-### Usefull ADB commands
+## Usefull ADB commands
 
 connect device
 ```
@@ -359,7 +384,7 @@ adb install -r <webview>
 - Download apk from releases section
 - adb install -r [filename.apk]
 
-## Manual 2.x version
+# Manual 2.x version
 
 - [backward compatibility](#backward-compatibility)
 - [main switch](#main-switch)
@@ -368,101 +393,104 @@ adb install -r <webview>
 - [tools menu](#tools-tab)
 - [integration menu](#integration-tab-v21)
 - [settings menu](#settings-tab)
-- [Home Assistant](#home-assistant-integration)
+- [Home Assistant / MQTT](#home-assistant-integration)
+- [ZStack packages](#zstack-packages)
 - [Example configuration](#example-configuration)
 
 > [!NOTE]
 > If the version number is marked, then it is only valid for that version.
 
-### backward compatibility
-version 2.x supports all v1.x features. Except the automatic brightness change which was experimental and replaced by light-level triggered brightness control see [Brightness category]
-(#brightness-category).
-> [!NOTE]
-> All configuration for v1.x is obsolete in 2.x therefore 2.x app must be reconfigured before use.
+## active switch
+The "active" switch is a master toggle that allows all application functions to be turned off simultaneously. Its purpose is to disable the entire operation without uninstalling the app.
 
-### main switch
-Main switch allows for the complete disabling of the application's functions. Controls the background activities. Purpose of being able to disable the whole app without uninstall.
-* active toggle
-  * activates a background service which runs even if the app is "killed" from app-switcher
-  * off state turns all app features off including "launch app after reboot"
+When the switch is set to on:
+  * It activates services that continue running even if the application is not in the foreground or is killed from the app switcher.
+
+When the switch is set to off:
+  * everything is disabled, including the "launch app after reboot" function.
 
 ## display tab
-This tab groups all screen or display related configurations and features. Such as how and when to turn on and off or how bright is it. etc
+This tab groups all settings related to screens or displays in one place. Here, you can configure when the screen turns on and off and adjust its brightness.
 
-****
 ### wakeup category
-****
-Category for all wake-up related functions.
+***
+This category groups all functions related to wake-up actions.
 
-Unfortunatelly this [AOSP 8.1](https://source.android.com/) build does not support wakeup device which causes that if official app is not running the device will go to deepsleep.
-Due to the lack of power button, just a hard reset (unplug) can wake up the device.
+The AOSP 8.1 build for this device does not support wake functionality. If the factory application is not running, the device may enter deep sleep. Without a power button, the only way to wake the device is to unplug it from the outlet.
 
 ![NSPanel Pro](doc/assets/app/display/sc1.png)
 
+_The image might be showing an older version._
+
 #### Wake-on-wave
-Wake up the device by hand wave. 
+Wakes the device with a hand wave. 
 > [!NOTE]
 > Before turning it on, set up the sensor parameters on the sensor tab.
 
 #### Wake on gesture
-Wake up the device by touch gesture. Multiple gestures can be selected the behaviour will be the same it will wakes up the device.
+Wakes the device using a touch gesture. Multiple gestures can be assigned simultaneously, and detecting any of them will wake the device.
 > [!IMPORTANT]
 > FW Over 1.10.0 wont support touch gestures.
 
-![NSPanel Pro](doc/assets/app/display/sc1_1.png)
-
-#### Wake from ScreenSaver (removed from v2.2.4 wake-on-wave now dismiss screensavers)
-Dismiss the ScreenSaver if it is active. Only works if wake-on-wave is enabled.
+![NSPanel Pro](doc/assets/app/display/sc1_1.png)  
+_The image might be showing an older version._
 
 #### Wake on network error
-Wakes the device up if network connection is lost to assist reconnection. 
+Wakes the device if it disconnects from the network to support reconnection. In some cases, the device will only reconnect to the network if the display is on.
 
 
-**** 
 ### brightness category
-****
-Category for all brightness related functions.
+***
+This category organizes all functions related to adjusting the display brightness.
 
-![NSPanel Pro](doc/assets/app/display/sc2.png)
+![NSPanel Pro](doc/assets/app/display/sc2.png)  
+_The image might be showing an older version._
 
 #### Brightness
-Set system level display brightness. On certain cases it is used to set if no light change event is triggered.
-#### Brightness on light-below switch
-Set brightness to the given value if light-below event is triggered. 
+Sets the system-wide display brightness.
 > [!NOTE]
-> Before turning it on, set up the sensor parameters on the sensor tab.
+> This setting is ineffective if adaptive brightness is enabled.
+
+#### Brightness on light-below switch
+Sets the display brightness to this value when a "light-below" event is triggered.
+> [!NOTE]
+> Before enabling this, ensure the sensor values are correctly configured for proper functionality.
 
 #### Brightness on light-below seekbar
-Set brightness to the prescribed value.
+Adjusts the desired display brightness value.
 
 #### Brightness on light-above switch
-Set brightness to the given value if light-above event is triggered. 
+Sets the display brightness to this value when a "light-above" event is triggered.
 > [!NOTE]
-> Before turning it on, set up the sensor parameters on the sensor tab.
+> Before enabling this, ensure the sensor values are correctly configured for proper functionality.
 
 #### Brightness on light-above seekbar
-Set brightness to the prescribed value.
-****
-### screen category
-****
-Category for all (lcd) screen related functions.
+Adjusts the desired display brightness value.
 
-![NSPanel Pro](doc/assets/app/display/sc3.png)
+### screen category
+***
+This category groups all functions related to the screen.
+
+![NSPanel Pro](doc/assets/app/display/sc3.png)  
+_The image might be showing an older version._
 
 #### Display sleep
-Set system level display sleep time. After the prescribed interval the screen will be turned off if another function does not override it, for example: Prevent turn off or Screen begin
+Sets the system-wide screen timeout duration. If the screen is inactive, it will enter sleep mode after this period.
 
 #### Display sleep mode
-Defines the sleep mode behaviour
+Configures what happens to the screen during sleep mode.
 - Screen off
   - completely turn the screen off
   > [!IMPORTANT]
-  > touch gestures only available in this mode
+  > Touch gestures are only available when the screen is turned off.
 - Screen dim
-  - after prescribed Display sleep time the screen will dim
+  - Puts the screen into a dimmed state during sleep mode. Dimmed mode means reduced brightness.
 
-#### Screen-on time swicth
-During a predefinied period it turns on the screen and it remains on untile the end of the interval.
+#### Screen-on time
+The Screen-on function turns the screen on at a specified time. Separate schedules can be set for weekdays and weekends.
+
+#### Screen-on prevent screen dim
+Prevents the screen from dimming when the Screen-on function is active.
 
 #### Screen-on begin on weekdays
 The time when the screen-on begins on weekdays. 
@@ -486,116 +514,148 @@ The time when the screen-on begins at weekends
 #### Screen-on end on weekends
 The time when the screen-on ends.
 
-![NSPanel Pro](doc/assets/app/display/sc4.png)
+![NSPanel Pro](doc/assets/app/display/sc4.png)  
+_The image might be showing an older version._
 
 ## sensor tab
-****
+All settings related to sensors are grouped here.
+
 ### sensor proximity category
 ****
 Category for proximity sensor related functions.
 
-![NSPanel Pro](doc/assets/app/sensor/sc5.png)
+![NSPanel Pro](doc/assets/app/sensor/sc5.png)  
+_The image might be showing an older version._
 
 #### Proximity sensor
-Proximity sensor live value shows actual sensor value and shows the trigger when it is activated.
+Proximity sensor live value displays the current value of the sensor and indicates when a trigger occurs.
 #### Proximity sensor trigger threshold
-Above the value the trigger event will be create
+The threshold value at which the trigger should activate.
+> [!NOTE]
+>  For firmware versions above FW3.0, the sensor value is fixed and cannot be adjusted.   
+> The sensor has two states:  
+>   0: Not detecting  
+>   1: Detecting  
+> Proximity cannot be fine-tuned.
 
-****
 ### sensor light category
 ****
-Category for proximity sensor related functions.
+This category includes functions related to the light sensor.
 
-![NSPanel Pro](doc/assets/app/sensor/sc6.png)
+![NSPanel Pro](doc/assets/app/sensor/sc6.png)  
+_The image might be showing an older version._
 
 #### Light sensor
-Light sensor live value shows actual sensor value and shows the trigger when it is activated.
+Light sensor live value shows the real-time value of the sensor and indicates when the trigger is activated.
 #### Light sensor trigger below
-Below the value the trigger event will be created
+Creates a trigger event when the value falls below the set threshold.
 #### Light sensor trigger above
-Above the value the trigger event will be created
+ Creates a trigger event when the value exceeds the set threshold.
+
+#### GPIO sensor
+Monitors changes on two GPIO ports at a specified interval and generates an event when a change occurs.
 
 ## tools tab
-****
+This tab groups various useful functions.
+
 ### autostart category
 ****
-Autostart or launch other app after device restart
+Automatically launches the configured application after the device restarts.
 
-![NSPanel Pro](doc/assets/app/tools/sc7.png)
+![NSPanel Pro](doc/assets/app/tools/sc7.png)  
+_The image might be showing an older version._
+
 #### Launch App after reboot
 Launch selected application after device reboot
 #### Wait for WIFI
-Start selected application after WIFI connection is established
+Delays the application start until a Wi-Fi connection is established.
 #### Whatchdog
-Monitoring selected app daily if it is not running, then it starts it.
+Monitors the application and restarts it if it is not running.
 #### Switch to app
-Switch to selected application
+Launches and brings the specified application to the foreground.
 
-### system ui (in 2.2.0)
+### system ui
 ****
+This tab contains all settings related to the system UI.
 #### NavigationBar
-Always shows the system level navigation bar.
+Enables the system level navigation bar.
 
 #### NavigationBar on swipe up
-Available if NavigationBar is turned off. An edge swipe up enables the navigation bar for X seconds.
+Displays the navigation bar with a swipe-up gesture and hides it after 10 seconds.
 
 #### NotificationBar on swipe down
-Shows the system level notification bar by edge swipe down. Originally it is disabled in Sonoff system.
+Displays the notification bar with a swipe-down gesture.
 
 ### other
 ****
 
-![NSPanel Pro](doc/assets/app/tools/sc8.png)
+![NSPanel Pro](doc/assets/app/tools/sc8.png)  
+_The image might be showing an older version._
 
 #### Switch to launcher
-Switch to default launcher
+Switches to the Launcher.
 
 #### Home on gesture
-The selected gesture will switch back to this application.
+Switches to this application when the assigned gesture is detected.
 
 ## integration tab
-****
+This tab contains all settings for external system integrations.
 
-![NSPanel Pro](doc/assets/app/integration/sc10.png)
+![NSPanel Pro](doc/assets/app/integration/sc10.png)  
+_The image might be showing an older version._
+
 ### zigbee category
 ****
-Category for Zigbee related settings
+Related to the Zigbee stack integration.
+
 #### State
 The current state of the connection.
 
-Possible states:
+Possible states can be:
 - connecting
-  - initiating connection
+  - Connection in progress
+- connected
+  -  Connected to the MQTT server but has not reported its state yet.
 - online
-  - connection established to on-device Zigbee stack
+  - The Zigbee stack is online.
 - offline
-  - on-device Zigbee is not available or offline
+  - The Zigbee stack is offline.
 - failure
-  - can not establish connection to Zigbee stack, retry every 5sec 
+  -  Failed to connect to the MQTT server, will be retried in every 5sec.
 
 #### Setup
-Setup Zigbee related settings
+Integration settings, including enabling or disabling the integration.
+> [!NOTE] 
+> When disabled, the external integration still runs, but the application does not monitor it.
 
 #### Role
-Shows device roles see Setup section
+The role of the Zigbee device.
+Possible values can be:
+- Coordinator
+- Router
 
-#### Zigbee Setup
+### Zigbee Setup
 
 #### State
 The current state of the connection.
 
-Possible states:
+Possible states can be:
 - connecting
-  - initiating connection
+  - Connection in progress
+- connected
+  -  Connected to the MQTT server but has not reported its state yet.
 - online
-  - connection established to on-device Zigbee stack
+  - The Zigbee stack is online.
 - offline
-  - on-device Zigbee is not available or offline
+  - The Zigbee stack is offline.
 - failure
-  - can not establish connection to Zigbee stack, retry every 5sec 
+  -  Failed to connect to the MQTT server, will be retried in every 5sec.
 
 #### Role
-Change Zigbee device role
+The role of the Zigbee device.
+Possible values can be:
+- Coordinator
+- Router
 
 Coordinator:
 - act as Zigbee coordinator, devices can be paired via Official Applications
@@ -603,15 +663,36 @@ Coordinator:
 Repeater:
 - act as Zigbee Repeater or Router. Pairing is available.
 
-#### Pairing
+#### Permit join (Coordinator mode)
+Allows new devices to join.
 
-Put device to pairing mode for 180 sec after timeout it will turn off automatically.
+#### List devices (Coordinator mode)
+Displays the list of connected devices and allows device disconnection.
+Important: Disconnection only occurs if the end device is awake.
+
+#### Pairing (Router mode)
+Puts device to pairing mode for 180 sec after timeout it will turn off automatically.
 Allows other Coordinators to pair with this device and integrate it into their own mesh network as a Repeater/Router.
 
+#### Zigbee Gateway Version
+Enables ZStack package installation (see: [ZStack packages](#zstack-packages)). After selecting a package, click the Install button to start the installer.
 
-### mqtt category
+On the installer page two options can be selected:
+- keep configuration
+- keep data
+These options preserve the state and settings of connected devices when installing a new package version.
+
+#### Factory reset
+Restores the factory ZStack.
+
+#### MQTT
+The ZStack monitoring and API calls are based on MQTT messages. This section allows you to configure the MQTT connection parameters for integration. By default, a local MQTT broker is installed on the device, but in some cases (e.g., with Z2M), you might want to use a central MQTT broker, such as in the case of HASS integration.
+
+### MQTT category
 ****
-Category for MQTT and HomeAssistant related settings
+This is where you configure the NSPanel Pro MQTT integration, enabling the features and events provided by the NSPanel Pro app to be accessible via MQTT.  
+
+When enabled, the integration will attempt to connect using the connection details specified in the configuration parameters. Only enable this if you’ve already set up the parameters correctly.
 
 #### State
 The current state of the connection.
@@ -634,7 +715,7 @@ If turned off the connection will be dissconnected
 #### MQTT Setup
 ![NSPanel Pro](doc/assets/app/integration/sc11.png)
 #### Enabled
-If turned off the connection will be dissconnected. Turn on only if you setup connection parameters correctly
+When enabled, the integration will attempt to connect using the connection details specified in the configuration parameters. Only enable this if you’ve already set up the parameters correctly.
 #### Connection status
 The current state of the connection.
 #### Publish events
@@ -664,7 +745,7 @@ Currently supported events:
 - Gesture - swipe right
   - send if gesture detected, touch gesture only available when the screen is off
 #### Enable commands
-
+Allows commands to be sent via MQTT. (see: [MQTT Command](#commands))
 
 #### Host
 MQTTv3 server host name only non-SSL is available in v2.1
@@ -677,16 +758,16 @@ Configured username
 #### Password
 Configured password
 #### Use Hostname as Device Id
-Automaticall generated Device Id is not quite human friendly, Hostname can be used as deviceid. 
+The automatically generated device_id might not be user-friendly, so the hostname can be used as the device ID instead. 
 
 > [!IMPORTANT]
-> Hostname must be set
+> Ensure the hostname is configured; refer to the Settings Tab for details.
 
 #### Device Id
 Unique device id
 
 #### HA Integration
-Enables MQTT Integration based integration, events and diagnostics are implemented.
+This enables MQTT-based HASS integration, making events, features, and diagnostics accessible. If enabled, it will also automatically configure the HASS integration for you.
 
 ![NSPanel Pro](doc/assets/app/integration/sc13.png)
 
@@ -700,10 +781,10 @@ Topic prefix usually homeassistant the default
 
 ## settings tab
 ****
-### general category
-****
 
-![NSPanel Pro](doc/assets/app/settings/sc14.png)
+![NSPanel Pro](doc/assets/app/settings/sc14.png)  
+_The image might be showing an older version._
+
 ### Audio feedback
 Plays audio on certain events such as identified touch gestures on in order to provide audio-based feedback.
 ### Resume on boot
@@ -712,10 +793,10 @@ Autostart NSPanelTools app after device restart
 This option reboots the device
 #### Hostname
 Changes the device hostname
-### debug category
-****
 
-![NSPanel Pro](doc/assets/app/settings/sc15.png)
+![NSPanel Pro](doc/assets/app/settings/sc15.png)  
+_The image might be showing an older version._
+
 #### Debug mode
 Changes log level to debug
 #### Verbos mode
@@ -723,7 +804,40 @@ Changes log level to verbose
 #### View log
 Display app log
 
-### Home Assistant integration
+## ZStack packages
+In newer firmware versions, aside from obvious app improvements, the ZGateway also tends to evolve. New Sonoff devices and possibly new features are added. For example, since firmware version 2.2.0, it has been possible to switch between Zigbee Coordinator and Router modes.
+
+The packages are extracted from the original firmware and converted to a portable format.
+
+### How custom package deployer works
+
+The installable packages will be placed in the release section of the **nspanel_pro_zigbee** repository. The packages are located in different branches, ensuring the source is open and accessible.
+
+During installation, the script downloads the ZIP file, extracts it into the **app/cache** directory, and installs the primary part of the package into the `/vendor/bin/siliconlabs_host`  and ` /data/local/nspanel_tools_pkg/<package type>` directories after archiving the existing contents. Archiving only occurs if the `package_version` marker file is not present in the directory, which indicates that it does not contain a custom package.
+
+The script can be reviewed in the relevant branch under the name `pm.sh`.
+
+## Sonoff package
+In this firmware version, you can change the Zigbee operation mode to router mode. I believe using it in Coordinator mode without the original application isn't practical because you can only connect Sonoff devices and cannot interact with them. If you want a more generic Coordinator, Zigbee2MQTT (z2m) is a better option.
+
+Zigbee2MQTT version is Node.js-based and is now available as an installable package.
+
+## Zigbee2MQTT package
+Before installing, check if there’s enough space on the `/data` partition using a command like `df -h`. If you haven’t heavily modified the device, you should have around 1.9GB of free space.
+
+The installer is designed to place only a few files on the `/vendor` partition, while the actual package is located under `/user/local/nspanel_tooks_pkg/<package type>`. This makes configuration changes straightforward.
+
+In this version, z2m connects to the local Mosquitto broker. If you want it to connect to another broker, such as the Home Assistant broker, you can find the configuration file in z2m/config.
+
+zigbee2mqtt frontend is available at: `http://<device ip>:8080/`
+
+> [!CAUTION]
+> Be aware that if z2m does not connect to the local broker, the application will not currently detect whether z2m is running and will not allow modifications. It will treat it as if it is not running. However, you can still reset or replace it if needed.
+
+### Package configuration
+Curently packages configurations are available in ```/data/local/nspanel_tools_pkg/<package>/config``` folder. UI is not support it yet.
+
+## Home Assistant integration
 
 Integration based on HA official MQTT module. 
 
@@ -739,142 +853,159 @@ Configured device data:
 
 Device entities are unique thus generated entity name can be renamed anytime.
 
-#### Entities
+### Entities
 If an event has not been sent the value is unknown
 
-#### Diagnostic Sensor
-- Sends IP Address string once a day every 24h.
-- Receives availability information, if the "eye" icon is gray the device is offline
+### Diagnostic Sensor
+Sends the IP address once per day, refreshing every 24 hours. Also sends availability information. (If the eye icon is gray, the panel is offline.)
 
-###### MQTT availability status
-Topic: nspanelpro/\<devicename>/status
+### NSPanel availability status
+Sends availability information.
 
-Values: 
-- online
-- offline
+#### Topic
+```nspanelpro/\<devicename>/status```
 
-###### MQTT started status
-Topic: nspanelpro/\<devicename>/state/started_at
+#### Values
+- ```online```
+- ```offline```
 
-Payload: 
-- {"started_at":\<utc time>}
+### NSPanel started status
+Sends last start date.
 
-###### MQTT scheduled reboot status
-Topic: nspanelpro/\<devicename>/state/scheduled_reboot_at
+#### Topic
+```nspanelpro/\<devicename>/state/started_at```
 
-Payload: 
-- {"scheduled_reboot_at":\<utc time>}
+#### Payload
+```{"started_at":\<utc time>}```
 
-###### MQTT ip address
-Topic: nspanelpro/\<devicename>/state/ip_address
+### Scheduled reboot status
+Sends scheduled reboot next date.
 
-Payload: 
-- {"ip_address":\<ip>}
+#### Topic
+```nspanelpro/\<devicename>/state/scheduled_reboot_at```
 
-#### Proximity Event
-Sends event when the proximity sensor trigger is occured.
+#### Payload
+```{"scheduled_reboot_at":\<utc time>}```
 
-###### MQTT
-Topic: nspanelpro/\<devicename>/event/proximity
+### NSPanel ip address
+Sends panel ip address.
 
-Payload: 
-{"event_type":\<values>}
+#### Topic 
+```nspanelpro/\<devicename>/state/ip_address```
 
-Values: 
-- triggered
+#### Payload
+```{"ip_address":\<ip>}```
+
+### Proximity Event
+Sends sensor trigger events.
+
+#### Topic
+```nspanelpro/\<devicename>/event/proximity```
+
+#### Payload
+```{"event_type":\<values>}```
+
+#### Values
+- ```triggered```
 
 
-#### Touch Event
-Sends event when the touch event is triggered. 
+### Touch Event
+Sends sensor trigger events.
 
 > [!IMPORTANT]
 > Touch events can only be triggered when the screen is off.
 
-###### MQTT
-Topic: nspanelpro/\<devicename>/event/touch
+#### Topic
+```nspanelpro/\<devicename>/event/touch```
 
-Payload: 
-{"event_type":\<values>}
+#### Payload
+```{"event_type":\<values>}```
 
-Values: 
-- tap
-- swipe_up
-- swipe_down
-- swipe_left
-- swipe_right
+#### Values
+- ```tap```
+- ```swipe_up```
+- ```swipe_down```
+- ```swipe_left```
+- ```swipe_right```
 
-#### Light Event
-Sends light sensor triggers is occured.
+### Light Event
+Sends sensor trigger events.
 
-###### MQTT
-Topic: nspanelpro/\<devicename>/event/light
+#### Topic
+```nspanelpro/\<devicename>/event/light```
 
-Payload: 
-{"event_type":\<values>}
+#### Payload
+```{"event_type":\<values>}```
 
-Values: 
-- light_above
-- light_below
-- light_normal
+#### Values
+- ```light_above```
+- ```light_below```
+- ```light_normal```
 
-#### Commands
-Proceeds various action on the device.
+### Commands
+Executes various actions on the panel.
 
-###### MQTT
-Topic: nspanelpro/\<devicename>/command/device
+#### Topic
+```nspanelpro/\<devicename>/command/device```
 
-Payload: 
-{"command":\<command>}
+#### Payload
+```{"command":\<command>}```
 
-###### Available commands
-- default_app: switch to default selected app
-- launcher: switch to launcher
-- wake_up: wakes up the device
-- sleep: sleeps device immediately
-- reboot: Should send 3 times in a row to reboot the device.
-- adb: Enables on device ADB
+#### Available commands
+- ```default_app```: switch to default selected app
+- ```launcher```: switch to launcher
+- ```wake_up```: wakes up the device
+- ```sleep```: sleeps device immediately
+- ```reboot```: Should send 3 times in a row to reboot the device.
+- ```adb```: Enables on device ADB
 
-#### Turn switches
-Turn on device GPIO switches.
+### Turn switches
+Controls the state of GPIO switches.
 
-###### MQTT
-Topic: nspanelpro/\<devicename>/command/\<switch>
+#### Topic
+```nspanelpro/\<devicename>/command/\<switch>```
 
-Switches:
-- switch_1
-- swicth_2
+#### Switches
+- ```switch_1```
+- ```swicth_2```
 
-Payload: 
-{"state":\<state>}
+#### Payload
+```{"state":\<state>}```
 
-###### Available states
-- on: turn switch on
-- off: turn switch off
+#### Available states
+- ```on```: turn switch on
+- ```off```: turn switch off
 
-#### Device configuration
-Enables query and update nspanel tool apps configuration.
+## MQTT Based device configuration
+Allows querying and setting the app's configurations.
 
-###### MQTT Answer
-Topic: nspanelpro/\<devicename>/config
+### Answer
+Receives all responses to queries.
 
-###### MQTT Query
-The application configuration can be queried.
+#### Topic
+```nspanelpro/\<devicename>/config```
 
-Topic: nspanelpro/\<devicename>/config/query
+### Query
+Enables querying of settings.
 
-Payload: 
+#### Topic
+```nspanelpro/\<devicename>/config/query```
+
+#### Payload
 - empty: query all configuration includeing defaults
-- filter: specific configuration values can be queried. Payload form is : { \<configuration_item>:null }
+- filter: specific configuration values can be queried. Payload form is : ```{ \<configuration_item>:null }```
 
-###### MQTT Update
-Updates the application configuration.
+### Update
+Updates the app's configuration.
 
-Topic: nspanelpro/\<devicename>/config/update
+#### Topic
+```nspanelpro/\<devicename>/config/update```
 
-Payload: 
-{ \<configuration_item>:\<value> }
+#### Payload
+```{ \<configuration_item>:\<value> }```
 
-## Example configuration
+
+## NSPanel App example configuration
 
 ### Device config
 - wake on wave: on
