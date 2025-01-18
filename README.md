@@ -51,6 +51,7 @@ Release is dedicated to:
 
 #### new features
 - zstack packages are available currently: Sonoff, z2m
+  - ZStack related discussons: https://github.com/seaky/nspanel_pro_tools_apk/discussions/186
 - ability to monitor/report gpio changes - default is off
   - available on sensor page
 - armv7 support added
