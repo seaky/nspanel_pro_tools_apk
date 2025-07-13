@@ -41,6 +41,51 @@ Actual plan is to have a release in every Quarter.
 - voice based commands
 - mqttv5 ssl/tls
 
+### v2.3.3 (2025-07-13)
+
+Release is dedicated to:
+
+![INTERNATIONAL ROCK DAY](doc/assets/rock_day.jpg)
+
+#### new features
+- add option to set dim level - [Issue #192](https://github.com/seaky/nspanel_pro_tools_apk/issues/192)
+- add option to use non-system-level screen-off mechanism, device turns the screen off without any power management changes - enables background processes to remain alive
+- diferentiate mqtt events - [Issue #183](https://github.com/seaky/nspanel_pro_tools_apk/issues/183)
+  - "seq" sequence field has been added to all events, which increments continously
+- request start/stop for custom packages - [Issue #181](https://github.com/seaky/nspanel_pro_tools_apk/issues/181)
+- Zigbee integration screens has been reorganized
+- add ability to use multi-touch gestures while screen is off, only available on Sonoff under fw v1.11
+  - multi-tap, multi-finger
+  - use case: turn on wake-on-wave, turn off wake-on-gesture, enable proper mqtt events thus you can turn on lights or control blinds etc without wake the device up
+- add ability to use multi-touch gestures on non-native-touch support devices currently only available on sonoff, s6, t6e
+  - swipe right from left edge to activate
+  - can be turned off on display panel
+  - use case: turn on any wake command, enable proper mqtt events. Wake up the device and swipe right from left edge to make touch gesture thus you can turn on lights or control blinds etc
+- report multi touch gestures events on mqtt
+- add abilty to run on NON SMATEK devices with limitations
+- Password masking for MQTT settings - [Issue #224](https://github.com/seaky/nspanel_pro_tools_apk/issues/224)
+- Touch to wake is slow - [Issue #223](https://github.com/seaky/nspanel_pro_tools_apk/issues/223)
+- NavigationBar setting not returned by mqtt query command and not possible to set via mqtt update command - [Issue #216](https://github.com/seaky/nspanel_pro_tools_apk/issues/216)
+
+#### impovements
+- schedule reboot function has been rewritten
+- add behavior to modules
+- add boottime modules
+- add ability to react to device capability
+- home-on-wave, home-on-gesture refactored due to mult-touch capability
+- add isAvailable to all sensors to detect it on non-Sonoff devices
+- add capability detection to all fragments and modules
+- add capability to start/stop custom packages
+- add ability to detect S6, T6E, TPA10
+- permission util has been fully rewritten
+- add flavor to build T6E system privileged app
+
+
+#### bufix
+- Brightness sometimes set to 0 even if light-events are not used - [Issue #178](https://github.com/seaky/nspanel_pro_tools_apk/issues/178)
+- Scheduled reboot does not fire [Issue #225](https://github.com/seaky/nspanel_pro_tools_apk/issues/225)
+
+
 ### v2.3.3 Beta is open (2025-03-01)
 
 - [see the details here](https://github.com/seaky/nspanel_pro_tools_apk/discussions/208) 
