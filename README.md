@@ -54,7 +54,7 @@ Actual plan is to have a release in every Quarter.
 - for Sonoff 4.x users, this version supports 4.x zigbee management. 
 
 > [!IMPORTANT]
-> - Only z2m 2.7.1.6+ pacakges supports Sonoff4!! 
+> - Only z2m 2.7.1.6+ packages supports Sonoff4!! 
 > - Stock Sonoff4.x firmware zigbee router/coordinator switching is unstable thus it is currently not available 
 
 ### v2.3.3 (2025-07-13)
