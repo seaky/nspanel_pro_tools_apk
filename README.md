@@ -41,6 +41,20 @@ Actual plan is to have a release in every Quarter.
 - voice based commands
 - mqttv5 ssl/tls
 
+### v2.3.4 BETA1 (2026-01-05)
+*Zigbee pacakage management and internal zigbee related code was heavily modified! That is the rason for beta release!*
+
+#### new features
+- add option for inverted proximity sensor logic [sensor/proximity] - [Issue #192](https://github.com/seaky/nspanel_pro_tools_apk/issues/252)
+- add option for enable/disable message numbering [integration/mqtt] - [Issue #192](https://github.com/seaky/nspanel_pro_tools_apk/issues/245)
+- add option for disable ipv6 [tools/other] - [Issue #192](https://github.com/seaky/nspanel_pro_tools_apk/issues/238)
+- add option for disable accessibility "white" circle [tools/other]
+
+
+- for Sonoff 4.x users, this version supports 4.x zigbee management. > [!IMPORTANT]
+> - Only z2m 2.7.1.6+ pacakges supports Sonoff4!! 
+> - Stock Sonoff4.x firmware zigbee router/coordinator switching is unstable thus it is currently not available 
+
 ### v2.3.3 (2025-07-13)
 
 Release is dedicated to:
