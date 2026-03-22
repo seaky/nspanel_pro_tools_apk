@@ -50,7 +50,7 @@ Actual plan is to have a release in every Quarter.
 - add screenshot capture - [Issue #253](https://github.com/seaky/nspanel_pro_tools_apk/issues/253)
   - screenshot capture can be initated from HA MQTT via screenshot capture or "screenshot_capture" mqtt command
   - last screenshot is available under sensor/screenshot block
-  - screnshot capture interval in beta is 1sec, duration can be changes under Integration -> MQTT -> Command settings default is 10sec
+  - screenshot capture interval in beta is 1sec, duration can be changed under Integration -> MQTT -> Command settings default is 10sec
 
 ### v2.3.4 BETA2 (2026-01-09)
 
