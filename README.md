@@ -41,6 +41,17 @@ Actual plan is to have a release in every Quarter.
 - voice based commands
 - mqttv5 ssl/tls
 
+### v2.3.4 BETA3 (2026-03-22)
+
+#### bufix
+- deprecated HA api - [Issue #257](https://github.com/seaky/nspanel_pro_tools_apk/issues/257), [Issue #250](https://github.com/seaky/nspanel_pro_tools_apk/issues/250)
+
+#### new features
+- add screenshot capture - [Issue #253](https://github.com/seaky/nspanel_pro_tools_apk/issues/253)
+  - screenshot capture can be initated from HA MQTT via screenshot capture or "screenshot_capture" mqtt command
+  - last screenshot is available under sensor/screenshot block
+  - screnshot capture interval in beta is 1sec, duration can be changes under Integration -> MQTT -> Command settings default is 10sec
+
 ### v2.3.4 BETA2 (2026-01-09)
 
 #### bufix
